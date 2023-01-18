@@ -2,10 +2,5 @@ venv/
 
 .ipynb_checkpoints/
 
-FashionMNIST/
-MNIST/
 flowers-102/
-jpg/
-stanford_cars/
-yellow/
-model
+*.pt
