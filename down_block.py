@@ -5,12 +5,12 @@ import torch.nn.functional as F
 class DownBlock(nn.Module):
     def __init__(self, in_ch, out_ch, time_emb_dim):
         super().__init__()
-        self.conv1 = nn.Conv2d(in_ch, out_ch, 3, padding=1)
+        self.conv1 = nn.Conv2d(in_ch, out_ch, kernel_size=3, padding=1)
         self.bnorm1 = nn.BatchNorm2d(out_ch)
 
         self.time_mlp = nn.Linear(time_emb_dim, out_ch)
 
-        self.conv2 = nn.Conv2d(out_ch, out_ch, 3, padding=1)
+        self.conv2 = nn.Conv2d(out_ch, out_ch, kernel_size=3, padding=1)
         self.bnorm2 = nn.BatchNorm2d(out_ch)
 
         self.transform = nn.Conv2d(out_ch, out_ch, 4, 2, 1)

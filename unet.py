@@ -10,8 +10,8 @@ class Unet(nn.Module):
         super().__init__()
         down_channels = (image_size, image_size * 2, image_size * 4, image_size * 8)
         up_channels = down_channels[::-1]
-        out_dim = 1
         time_emb_dim = 32
+        out_dim = 3
 
         self.time_mlp = nn.Sequential(
             SinusoidalPositionEmbeddings(time_emb_dim),
@@ -27,7 +27,7 @@ class Unet(nn.Module):
         self.ups = nn.ModuleList([UpBlock(prev, lat, time_emb_dim)
                                   for prev, lat in zip(up_channels, up_channels[1:])])
 
-        self.output = nn.Conv2d(up_channels[-1], 3, out_dim)
+        self.output = nn.Conv2d(up_channels[-1], out_dim, kernel_size=1)
 
     def forward(self, x, timestep):
         t = self.time_mlp(timestep)
