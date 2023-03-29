@@ -1,6 +1,9 @@
-venv/
+.idea/
 
+__pycache__/
 .ipynb_checkpoints/
+
+venv/
 
 flowers-102/
 *.pt
